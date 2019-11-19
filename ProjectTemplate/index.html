@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
+	<!-- <script type="text/javascript">
+		function TestButtonHandler() {
+			var webMethod = "ProjectServices.asmx/TestConnection";
+			var parameters = "{}";
+
+			//jQuery ajax method
+			$.ajax({
+				type: "POST",
+				url: webMethod,
+				data: parameters,
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (msg) {
+					var responseFromServer = msg.d;
+					alert(responseFromServer);
+				},
+				error: function (e) {
+					alert("this code will only execute if javascript is unable to access the webservice");
+				}
+			});
+		}
+	</script> -->
+	<!--END OF YOUR OWN JAVASCRIPT-->
+
+	<!--AND YOUR OWN CSS CAN GO HERE AS WELL-->
+	<style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* For phones (portrait) unless another @media rule below is fired */
+        @media only screen and (max-width: 499px) {
+            .col-sm-00 {
+                display: none;
+            }
+
+            .col-sm-12 {
+                width: 100%;
+            }
+
+            body {
+                background-color: black;
+            }
+
+            [class*="col-sm-"] {
+                border: 4px solid black;
+            }
+        }
+
+        /* For medium screens (e.g. landscape phones and portrait tablets) */
+        @media only screen and (min-width: 500px) {
+            .col-md-00 {
+                display: none;
+            }
+
+            .col-md-01 {
+                width: 8.33%;
+            }
+
+            .col-md-02 {
+                width: 16.66%;
+            }
+
+            .col-md-03 {
+                width: 25.00%;
+            }
+
+            .col-md-04 {
+                width: 33.33%;
+            }
+
+            .col-md-05 {
+                width: 41.66%;
+            }
+
+            .col-md-06 {
+                width: 50.00%;
+            }
+
+            .col-md-07 {
+                width: 58.33%;
+            }
+
+            .col-md-08 {
+                width: 66.66%;
+            }
+
+            .col-md-09 {
+                width: 75.00%;
+            }
+
+            .col-md-10 {
+                width: 83.33%;
+            }
+
+            .col-md-11 {
+                width: 91.66%;
+            }
+
+            .col-md-12 {
+                width: 100.00%;
+            }
+
+            body {
+                background-color: grey;
+            }
+
+            [class*="col-md-"] {
+                border: 4px solid grey;
+            }
+        }
+
+        /* For large screens or landscape tablets*/
+        @media only screen and (min-width: 1024px) {
+            .col-md-00 {
+                display: initial;
+            }
+
+            .col-sm-00 {
+                display: initial;
+            }
+
+            .col-lg-01 {
+                width: 8.33%;
+            }
+
+            .col-lg-02 {
+                width: 16.66%;
+            }
+
+            .col-lg-03 {
+                width: 25.00%;
+            }
+
+            .col-lg-04 {
+                width: 33.33%;
+            }
+
+            .col-lg-05 {
+                width: 41.66%;
+            }
+
+            .col-lg-06 {
+                width: 50.00%;
+            }
+
+            .col-lg-07 {
+                width: 58.33%;
+            }
+
+            .col-lg-08 {
+                width: 66.66%;
+            }
+
+            .col-lg-09 {
+                width: 75.00%;
+            }
+
+            .col-lg-10 {
+                width: 83.33%;
+            }
+
+            .col-lg-11 {
+                width: 91.66%;
+            }
+
+            .col-lg-12 {
+                width: 100.00%;
+            }
+
+            body {
+                background-color: white;
+            }
+
+            [class*="col-lg-"] {
+                border: 4px solid white;
+            }
+        }
+
+        [class*="col-"] {
+            float: left;
+            border-radius: 10px;
+        }
+
+        .row::after {
+            content: "";
+            clear: both;
+            display: block;
+        }
+	</style>
+	<!--END OF YOUR OWN CSS-->
+</head >
+<body>
+    <div class="row">
+        <div class="col-lg-01"></div>
+        <div class="col-lg-04"><textarea id="inputText" cols="50" rows="25" style="resize: none;"></textarea></div>
+        <div class="col-lg-01"></div>
+        <div class="col-lg-05">
+            <textarea id="myTweet"></textarea> <br> <button onclick="tweet()">Tweet</button> <br><br><br><br><br> Instagram post here
+            <br><br><br><br><br><br> Facebook post here <br><br><br><br><br><br>
+        </div>
+        <div class="col-lg-01"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-01"></div>
+        <div class="col-lg-04"><iframe src="uploadbutton.aspx" style="border:none; width:500px; height:100px; align-self:center;"></iframe></div>
+        <div class="col-lg-01"></div>
+        <div class="col-lg-05"></div>
+        <div class="col-lg-01"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-01"></div>
+        <div class="col-lg-04"><button>Summarize</button></div>
+        <div class="col-lg-01"></div>
+        <div class="col-lg-05"></div>
+        <div class="col-lg-01"></div>
+    </div>
+
+    <script>
+        function tweet() {
+            var url = "https://twitter.com/intent/tweet";
+            var text = document.getElementById("myTweet").value;
+            var hashtags = "testTweet";
+            //var via = "@username";
+            window.open(url + "?text=" + text + ";hashtags=" + hashtags/* + ";via=" + via,"","width=500,height=300"*/);
+        }
+    </script>
+    <!--<iframe src="ProjectTemplate\uploadbutton.aspx" style="border:none; width:500px; height:100px; align-self:center;"></iframe>-->
+    <!-- <button onclick="javascript: TestButtonHandler();">Click here to test connection!</button> -->
+</body>
+
+
+</html >
