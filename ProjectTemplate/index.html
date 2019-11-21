@@ -205,8 +205,10 @@
         <div class="col-lg-04"><textarea id="inputText" cols="50" rows="25" style="resize: none;"></textarea></div>
         <div class="col-lg-01"></div>
         <div class="col-lg-05">
-            <textarea id="myTweet"></textarea> <br> <button onclick="tweet()">Tweet</button> <br><br><br><br><br> Instagram post here
+            <textarea id="myTweet" cols="50" rows="10" style="resize: none;"></textarea> <br> <button onclick="tweet()">Tweet</button> 
+            <br><br><br><br><br> Instagram post here
             <br><br><br><br><br><br> Facebook post here <br><br><br><br><br><br>
+            <p id="summaryResult"></p>
         </div>
         <div class="col-lg-01"></div>
     </div>
@@ -219,13 +221,76 @@
     </div>
     <div class="row">
         <div class="col-lg-01"></div>
-        <div class="col-lg-04"><button>Summarize</button></div>
+        <div class="col-lg-04"><button onclick="summarize()">Summarize</button></div>
         <div class="col-lg-01"></div>
         <div class="col-lg-05"></div>
         <div class="col-lg-01"></div>
     </div>
 
     <script>
+
+        function summarize() {
+
+            if (document.getElementById("<%= Uploader.ClientID %>") == null) {
+            //if (Server.MapPath(form1.FileName) == null) {
+                alert("passed if");
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "https://api.meaningcloud.com/summarization-1.0",
+                    "of": "xml",
+                    "method": "POST",
+                    "headers": {
+                        "content-type": "application/x-www-form-urlencoded"
+                    },
+                    "data": {
+                        "key": "27060a263c51fdfbbd877caeadb3b2e1",
+                        "txt": document.getElementById("inputText").value,
+                        //"txt": "YOUR_TXT_VALUE",
+                        //"url": "YOUR_URL_VALUE",
+                        //"doc": document.getElementById("<%= form1.ClientID %>").value,
+                        "sentences": "1"
+                    }
+                }
+
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+                    var finalSummary = (response.summary)
+                    document.getElementById("summaryResult").innerHTML = finalSummary;
+                    document.getElementById("myTweet").innerHTML = finalSummary;
+                });
+            }
+            else {
+                alert("else statement");
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "https://api.meaningcloud.com/summarization-1.0",
+                    "of": "xml",
+                    "method": "POST",
+                    "headers": {
+                        "content-type": "application/x-www-form-urlencoded"
+                    },
+                    "data": {
+                        "key": "27060a263c51fdfbbd877caeadb3b2e1",
+                        //"txt": document.getElementById("inputText").value,
+                        //"url": "YOUR_URL_VALUE",
+                        //"doc": "YOUR_DOC_VALUE",
+                        "doc": document.getElementById("<%= form1.ClientID %>"),
+                        "sentences": "1"
+                    }
+                }
+
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+                    var finalSummary = (response.summary)
+                    document.getElementById("summaryResult").innerHTML = finalSummary;
+                    document.getElementById("myTweet").innerHTML = finalSummary;
+                });
+             }
+        }
+
+
         function tweet() {
             var url = "https://twitter.com/intent/tweet";
             var text = document.getElementById("myTweet").value;
