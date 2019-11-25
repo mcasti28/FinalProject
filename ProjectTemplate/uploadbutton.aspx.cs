@@ -25,11 +25,12 @@ namespace accountmanager
 					Uploader.SaveAs(Server.MapPath("~/") + "uploads/" + filename);
 					string[] textLines = File.ReadAllLines(Server.MapPath("~/")+"/uploads/" + filename);
 
-                    var client = new RestClient("https://api.meaningcloud.com/summarization-1.0");
-                    var request = new RestRequest(Method.POST);
-                    request.AddHeader("content-type", "application/x-www-form-urlencoded");
-                    request.AddParameter("application/x-www-form-urlencoded", "key=YOUR_KEY_VALUE&txt=YOUR_TXT_VALUE&url=YOUR_URL_VALUE&doc=YOUR_DOC_VALUE&sentences=YOUR_SENTENCES_VALUE", ParameterType.RequestBody);
-                    IRestResponse response = client.Execute(request);
+                    //var client = new RestClient("https://api.meaningcloud.com/summarization-1.0");
+                    //var request = new RestRequest(Method.POST);
+                    //request.AddHeader("content-type", "application/x-www-form-urlencoded");
+                    //request.AddParameter("application/x-www-form-urlencoded", 
+                    //    "key=YOUR_KEY_VALUE&txt=YOUR_TXT_VALUE&url=YOUR_URL_VALUE&doc=YOUR_DOC_VALUE&sentences=YOUR_SENTENCES_VALUE", ParameterType.RequestBody);
+                    //IRestResponse response = client.Execute(request);
 
 
                     StatusLabel.Text = "Success! First line of text: "+textLines[0];
