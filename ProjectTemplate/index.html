@@ -215,8 +215,10 @@
     <div class="row">
         <div class="col-lg-01"></div>
         <div class="col-lg-04">
-            Select a text file:
-            <input type="file" id="fileInput">
+            <form id="myForm">
+                Select a text file:
+                <input type="file" id="fileInput">
+            </form>
             <pre id="fileDisplayArea"></pre>
             <!--<iframe src="uploadbutton.aspx" style="border:none; width:500px; height:100px; align-self:center;"></iframe>-->
         </div>
@@ -227,7 +229,7 @@
     <div class="row">
         <div class="col-lg-01"></div>
         <div class="col-lg-04"><button onclick="summarize()">Summarize</button></div>
-        <div class="col-lg-01"><button onclick="clear()">Clear</button></div>
+        <div class="col-lg-01"><button onclick="Clear()">Clear</button></div>
         <div class="col-lg-05"></div>
         <div class="col-lg-01"></div>
     </div>
@@ -270,6 +272,8 @@
             console.log(document.getElementById("fileInput"));
             if (fileText != null) {
                 console.log("value exists");
+                document.getElementById("inputText").value = " ";
+
                 //console.log(document.getElementById("fileDisplayArea"));
                 //console.log(document.getElementById("fileDisplayArea").value);
                 //console.log(document.getElementById("fileDisplayArea").innerText);
@@ -344,12 +348,14 @@
         }
 
 
-        function clear() {
-            console.log('clear');
+        function Clear() {
+            console.log("clear");
             document.getElementById("summaryResult").innerHTML = " ";
             document.getElementById("myTweet").innerText = " ";
             document.getElementById("inputText").value = " ";
-
+            fileText = null;
+            document.getElementById("fileInput").innerText = " ";
+            document.getElementById("myForm").reset();
 
 
         }
