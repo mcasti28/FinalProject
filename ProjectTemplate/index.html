@@ -35,6 +35,8 @@
 	<style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            border: 0;
         }
 
         /* For phones (portrait) unless another @media rule below is fired */
@@ -48,7 +50,7 @@
             }
 
             body {
-                background-color: black;
+                background-color: lightskyblue;
             }
 
             [class*="col-sm-"] {
@@ -111,7 +113,7 @@
             }
 
             body {
-                background-color: grey;
+                background-color: lightskyblue;
             }
 
             [class*="col-md-"] {
@@ -178,7 +180,7 @@
             }
 
             body {
-                background-color: white;
+                background-color: lightskyblue;
             }
 
             [class*="col-lg-"] {
@@ -195,26 +197,42 @@
             content: "";
             clear: both;
             display: block;
+            border: 0;
+        }
+
+        #head
+        {
+            text-align: center;
+            font-size: 100px;
+            background-color: black;
+            color: white;
+        }
+
+        #main {
+            background-color: lightskyblue;
         }
 	</style>
 	<!--END OF YOUR OWN CSS-->
 </head >
 <body>
-    <div class="row">
-        <div class="col-lg-01"></div>
-        <div class="col-lg-04"><textarea id="inputText" cols="50" rows="25" style="resize: none;"></textarea></div>
-        <div class="col-lg-01"></div>
-        <div class="col-lg-05">
-            <textarea id="myTweet" cols="50" rows="10" style="resize: none;"></textarea> <br> <button onclick="tweet()">Tweet</button> 
-            <br><br><br><br><br> Instagram post here
-            <br><br><br><br><br><br> Facebook post here <br><br><br><br><br><br>
+    <div class="row" id="head">
+        <div class="col-lg-12 col-md-12 col-sm-12"><b>SumPosts</b></div>
+    </div>
+
+    <div class="row" id="main">
+        <div class="col-lg-01 col-md-01"></div>
+        <div class="col-lg-04 col-md-04"><textarea id="inputText" cols="50" rows="25" style="resize: none;"></textarea></div>
+        <div class="col-lg-01 col-md-01"></div>
+        <div class="col-lg-05 col-md-05">
+            <textarea id="myTweet" cols="50" rows="10" style="resize: none;"></textarea> <br> <button onclick="tweet()">Tweet</button>
+            <br><br><br><br><br> 
             <p id="summaryResult"></p>
         </div>
-        <div class="col-lg-01"></div>
+        <div class="col-lg-01 col-md-01"></div>
     </div>
     <div class="row">
-        <div class="col-lg-01"></div>
-        <div class="col-lg-04">
+        <div class="col-lg-01 col-md-01"></div>
+        <div class="col-lg-04 col-md-04">
             <form id="myForm">
                 Select a text file:
                 <input type="file" id="fileInput">
@@ -222,14 +240,15 @@
             <pre id="fileDisplayArea"></pre>
             <!--<iframe src="uploadbutton.aspx" style="border:none; width:500px; height:100px; align-self:center;"></iframe>-->
         </div>
-        <div class="col-lg-01"></div>
-        <div class="col-lg-05"></div>
-        <div class="col-lg-01"></div>
+        <div class="col-lg-01 col-md-01"></div>
+        <div class="col-lg-05 col-md-05"></div>
+        <div class="col-lg-01 col-md-01"></div>
     </div>
     <div class="row">
         <div class="col-lg-01"></div>
-        <div class="col-lg-04"><button onclick="summarize()">Summarize</button></div>
-        <div class="col-lg-01"><button onclick="Clear()">Clear</button></div>
+        <div class="col-lg-02"><button onclick="summarize()">Summarize</button></div>
+        <div class="col-lg-02"><button onclick="Clear()">Clear</button></div>
+        <div class="col-lg-01"></div>
         <div class="col-lg-05"></div>
         <div class="col-lg-01"></div>
     </div>
@@ -243,12 +262,13 @@
         window.onload = function () {
             fileInput = document.getElementById('fileInput');
             fileDisplayArea = document.getElementById('fileDisplayArea');
-             
+            fileDisplayArea.innerText = "";
 
             fileInput.addEventListener('change', function (e) {
                 // Put the rest of the demo code here.
                 var file = fileInput.files[0];
                 var textType = /text.*/;
+                
 
                 if (file.type.match(textType)) {
                     var reader = new FileReader();
@@ -265,7 +285,7 @@
             });
         }
 
-        
+
 
         function summarize() {
             console.log(fileInput);
@@ -301,7 +321,7 @@
                     var finalSummary = (response.summary)
                     document.getElementById("summaryResult").innerHTML = finalSummary;
                     document.getElementById("myTweet").innerHTML = finalSummary;
-                }); 
+                });
 
 
             } else {
@@ -329,14 +349,14 @@
                     var finalSummary = (response.summary)
                     document.getElementById("summaryResult").innerHTML = finalSummary;
                     document.getElementById("myTweet").innerHTML = finalSummary;
-                }); 
+                });
 
             }
-        
+
         }
 
 
-        
+
 
 
         function tweet() {
@@ -360,9 +380,17 @@
 
         }
 
-
+        //window.fbAsyncInit = function () {
+        //    FB.init({
+        //        appId: '2669631379990698',
+        //        autoLogAppEvents: true,
+        //        xfbml: true,
+        //        version: 'v5.0'
+        //    });
+        //};
 
     </script>
+    <!--<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>-->
     <!--<iframe src="ProjectTemplate\uploadbutton.aspx" style="border:none; width:500px; height:100px; align-self:center;"></iframe>-->
     <!-- <button onclick="javascript: TestButtonHandler();">Click here to test connection!</button> -->
 </body>
