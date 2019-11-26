@@ -36,7 +36,6 @@
         * {
             box-sizing: border-box;
             margin: 0;
-            border: 0;
         }
 
         /* For phones (portrait) unless another @media rule below is fired */
@@ -54,7 +53,7 @@
             }
 
             [class*="col-sm-"] {
-                border: 4px solid black;
+                border: 4px solid lightskyblue;
             }
         }
 
@@ -117,7 +116,7 @@
             }
 
             [class*="col-md-"] {
-                border: 4px solid grey;
+                border: 8px solid lightskyblue;
             }
         }
 
@@ -133,50 +132,62 @@
 
             .col-lg-01 {
                 width: 8.33%;
+                border: 0;
             }
 
             .col-lg-02 {
                 width: 16.66%;
+                border: 0;
             }
 
             .col-lg-03 {
                 width: 25.00%;
+                border: 0;
             }
 
             .col-lg-04 {
                 width: 33.33%;
+                border: 0;
             }
 
             .col-lg-05 {
                 width: 41.66%;
+                border: 0;
             }
 
             .col-lg-06 {
                 width: 50.00%;
+                border: 0;
             }
 
             .col-lg-07 {
                 width: 58.33%;
+                border: 0;
             }
 
             .col-lg-08 {
                 width: 66.66%;
+                border: 0;
             }
 
             .col-lg-09 {
                 width: 75.00%;
+                border: 0;
             }
 
             .col-lg-10 {
                 width: 83.33%;
+                border: 0;
             }
 
             .col-lg-11 {
                 width: 91.66%;
+                border: 0;
             }
 
             .col-lg-12 {
                 width: 100.00%;
+                border: 0;
             }
 
             body {
@@ -184,7 +195,7 @@
             }
 
             [class*="col-lg-"] {
-                border: 4px solid white;
+                border-top: 20px solid lightskyblue;
             }
         }
 
@@ -206,17 +217,22 @@
             font-size: 100px;
             background-color: black;
             color: white;
+            /*border: 4px solid black;*/
         }
 
         #main {
             background-color: lightskyblue;
+        }
+
+        #header {
+            border: 4px solid black;
         }
 	</style>
 	<!--END OF YOUR OWN CSS-->
 </head >
 <body>
     <div class="row" id="head">
-        <div class="col-lg-12 col-md-12 col-sm-12"><b>SumPosts</b></div>
+        <div class="col-lg-12 col-md-12 col-sm-12" id="header"><b>SumPosts</b></div>
     </div>
 
     <div class="row" id="main">
