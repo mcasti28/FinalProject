@@ -227,16 +227,21 @@
     <div class="row">
         <div class="col-lg-01"></div>
         <div class="col-lg-04"><button onclick="summarize()">Summarize</button></div>
-        <div class="col-lg-01"></div>
+        <div class="col-lg-01"><button onclick="clear()">Clear</button></div>
         <div class="col-lg-05"></div>
         <div class="col-lg-01"></div>
     </div>
 
     <script>
 
+        var fileText;
+        var fileInput;
+        var fileDisplayArea;
+
         window.onload = function () {
-            var fileInput = document.getElementById('fileInput');
-            var fileDisplayArea = document.getElementById('fileDisplayArea');
+            fileInput = document.getElementById('fileInput');
+            fileDisplayArea = document.getElementById('fileDisplayArea');
+             
 
             fileInput.addEventListener('change', function (e) {
                 // Put the rest of the demo code here.
@@ -247,7 +252,8 @@
                     var reader = new FileReader();
 
                     reader.onload = function (e) {
-                        fileDisplayArea.innerText = reader.result;
+                        //fileDisplayArea.innerText = reader.result;
+                        fileText = reader.result;
                     }
 
                     reader.readAsText(file);
@@ -260,15 +266,47 @@
         
 
         function summarize() {
+            console.log(fileInput);
+            console.log(document.getElementById("fileInput"));
+            if (fileText != null) {
+                console.log("value exists");
+                //console.log(document.getElementById("fileDisplayArea"));
+                //console.log(document.getElementById("fileDisplayArea").value);
+                //console.log(document.getElementById("fileDisplayArea").innerText);
+                //console.log(fileText);
 
-            if (filename == null) {
-            //if (Server.MapPath(form1.FileName) == null) {
-                alert("passed if");
                 var settings = {
                     "async": true,
                     "crossDomain": true,
                     "url": "https://api.meaningcloud.com/summarization-1.0",
-                    "of": "xml",
+                    "method": "POST",
+                    "headers": {
+                        "content-type": "application/x-www-form-urlencoded"
+                    },
+                    "data": {
+                        "key": "27060a263c51fdfbbd877caeadb3b2e1",
+                        "txt": fileText,
+                        "url": "YOUR_URL_VALUE",
+                        "doc": "value",
+                        "sentences": "1"
+                    }
+                }
+
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+                    var finalSummary = (response.summary)
+                    document.getElementById("summaryResult").innerHTML = finalSummary;
+                    document.getElementById("myTweet").innerHTML = finalSummary;
+                }); 
+
+
+            } else {
+                console.log("no file");
+
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "https://api.meaningcloud.com/summarization-1.0",
                     "method": "POST",
                     "headers": {
                         "content-type": "application/x-www-form-urlencoded"
@@ -276,9 +314,8 @@
                     "data": {
                         "key": "27060a263c51fdfbbd877caeadb3b2e1",
                         "txt": document.getElementById("inputText").value,
-                        //"txt": "YOUR_TXT_VALUE",
-                        //"url": "YOUR_URL_VALUE",
-                        //"doc": document.getElementById("<%= form1.ClientID %>").value,
+                        "url": "YOUR_URL_VALUE",
+                        "doc": "YOUR_DOC_VALUE",
                         "sentences": "1"
                     }
                 }
@@ -288,37 +325,14 @@
                     var finalSummary = (response.summary)
                     document.getElementById("summaryResult").innerHTML = finalSummary;
                     document.getElementById("myTweet").innerHTML = finalSummary;
-                });
+                }); 
+
             }
-            else {
-                alert("else statement");
-                var settings = {
-                    "async": true,
-                    "crossDomain": true,
-                    "url": "https://api.meaningcloud.com/summarization-1.0",
-                    "of": "xml",
-                    "method": "POST",
-                    "headers": {
-                        "content-type": "application/x-www-form-urlencoded"
-                    },
-                    "data": {
-                        "key": "27060a263c51fdfbbd877caeadb3b2e1",
-                        //"txt": document.getElementById("inputText").value,
-                        //"url": "YOUR_URL_VALUE",
-                        //"doc": "YOUR_DOC_VALUE",
-                        "doc": document.getElementById("<%= form1.ClientID %>"),
-                        "sentences": "1"
-                    }
-                }
-
-                $.ajax(settings).done(function (response) {
-                    console.log(response);
-                    var finalSummary = (response.summary)
-                    document.getElementById("summaryResult").innerHTML = finalSummary;
-                    document.getElementById("myTweet").innerHTML = finalSummary;
-                });
-             }
+        
         }
+
+
+        
 
 
         function tweet() {
@@ -328,6 +342,20 @@
             //var via = "@username";
             window.open(url + "?text=" + text + ";hashtags=" + hashtags/* + ";via=" + via,"","width=500,height=300"*/);
         }
+
+
+        function clear() {
+            console.log('clear');
+            document.getElementById("summaryResult").innerHTML = " ";
+            document.getElementById("myTweet").innerText = " ";
+            document.getElementById("inputText").value = " ";
+
+
+
+        }
+
+
+
     </script>
     <!--<iframe src="ProjectTemplate\uploadbutton.aspx" style="border:none; width:500px; height:100px; align-self:center;"></iframe>-->
     <!-- <button onclick="javascript: TestButtonHandler();">Click here to test connection!</button> -->
